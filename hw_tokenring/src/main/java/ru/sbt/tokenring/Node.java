@@ -52,6 +52,7 @@ public class Node {
             throuputMin = min(throuputMin, tokensCount);
             throuputMax = max(throuputMax, tokensCount);
             checkpoint = System.nanoTime();
+            tokensCount = 0;
         }
     }
 
