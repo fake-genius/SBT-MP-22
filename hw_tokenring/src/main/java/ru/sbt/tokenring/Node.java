@@ -41,6 +41,7 @@ public class Node {
         }
         if (getId() == token.getStartingNode() && tokensCount > 0) {
             token.addLatency(token.getWayTime());
+            token.updateTime();
         }
         tokensCount++;
         next.push(token);

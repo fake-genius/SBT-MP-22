@@ -6,17 +6,21 @@ import java.util.List;
 public class Token {
     private final int startingNode;
     private final int destinationId;
-    private final long startingTime;
+    private long checkpointTime;
     private final List<Long> latencies = new ArrayList<>();
 
     public Token(int startingNode, int destinationId) {
         this.startingNode = startingNode;
         this.destinationId = destinationId;
-        startingTime = System.nanoTime();
+        checkpointTime = System.nanoTime();
     }
 
     public long getWayTime() {
-        return System.nanoTime() - startingTime;
+        return System.nanoTime() - checkpointTime;
+    }
+
+    public void updateTime() {
+        checkpointTime = System.nanoTime();
     }
 
     public int getDestinationId() {
