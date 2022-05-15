@@ -27,6 +27,8 @@ public class Node {
     }
 
     public void outputInfo() {
+        TokenRingCharacteristics.addThroughput(throuputMin);
+        TokenRingCharacteristics.addThroughput(throuputMax);
         System.err.println("Node " + internalId + ", throughput min " + throuputMin);
         System.err.println("Node " + internalId + ", throughput max " + throuputMax);
     }

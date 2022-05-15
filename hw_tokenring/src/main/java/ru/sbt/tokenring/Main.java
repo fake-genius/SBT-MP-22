@@ -7,6 +7,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import static java.lang.Thread.sleep;
 
 public class Main {
+
+    public static TokenRingCharacteristics characteristics;
     public static TokenRing prepareTokenRingNThreads(int n) {
         List<TokenQueue> queues = new ArrayList<>();
         for (int i = 0; i < n; ++i) {

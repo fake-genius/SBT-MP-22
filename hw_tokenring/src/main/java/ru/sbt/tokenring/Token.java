@@ -25,17 +25,11 @@ public class Token {
 
     public void addLatency(long latency) {
         latencies.add(latency);
-    }
-
-    public float averageLatency() {
-        float sum = 0f;
-        for (Long latency : latencies) {
-            sum += latency;
-        }
-        return sum / (latencies.size() * 1_000_000f);
+        TokenRingCharacteristics.addLatency(latency);
     }
 
     public void outputInfo() {
-        System.err.println("Token with dest " + destinationId + ", average latency " + averageLatency());
+        System.err.println("Token with dest " + destinationId + ", average latency "
+                + TokenRingCharacteristics.averageLong(latencies) / 1_000_000f);
     }
 }

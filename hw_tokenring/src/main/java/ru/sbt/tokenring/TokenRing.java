@@ -64,10 +64,10 @@ public class TokenRing {
                         e.printStackTrace();
                     }
                 });
+        TokenRingCharacteristics.outputInfo();
     }
 
     private void outputInfo() {
-        System.err.println("Throughput info in tokens per second");
         nodes.forEach(Node::outputInfo);
     }
 }
