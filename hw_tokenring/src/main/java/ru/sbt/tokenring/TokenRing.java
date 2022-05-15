@@ -34,7 +34,7 @@ public class TokenRing {
                     if (prevId < 0) {
                         prevId = count - 1;
                     }
-                    System.out.println("Thread " + n.getId() + ", queue " + queues.get(prevId));
+                    //System.out.println("Thread " + n.getId() + ", queue " + queues.get(prevId));
                     return new NodeThread(n, queues.get(prevId));
                 }).map(Thread::new)
                 .toList();
@@ -47,12 +47,14 @@ public class TokenRing {
     }
 
     public void start() {
-        System.out.println("Starting");
+        System.out.println("Starting with " + TokenRingParameters.threadsCount + " threads, " +
+                TokenRingParameters.tokensCount + " tokens");
         threads.forEach(Thread::start);
     }
 
     public void stop() {
         System.out.println("Terminating");
+        outputInfo();
         threads.stream()
                 .peek(Thread::interrupt)
                 .forEach(thread -> {
@@ -62,5 +64,10 @@ public class TokenRing {
                         e.printStackTrace();
                     }
                 });
+    }
+
+    private void outputInfo() {
+        System.err.println("Throughput info in tokens per second");
+        nodes.forEach(Node::outputInfo);
     }
 }

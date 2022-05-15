@@ -14,7 +14,7 @@ public class NodeThread implements Runnable{
     private void generateTokens(int count) throws InterruptedException {
         if (node.getId() == 1) {
             for (int i = 0; i < count; ++i) {
-                Token token = new Token(i + 1);
+                Token token = new Token(node.getId(), i % TokenRingParameters.threadsCount + 1);
                 queue.push(token);
             }
         }
@@ -23,16 +23,19 @@ public class NodeThread implements Runnable{
     @Override
     public void run() {
         try {
-            generateTokens(3);
-            System.out.println("Thread " + node.getId() + " queue is " + queue);
+            node.setInternalId(node.getId());
+            generateTokens(TokenRingParameters.tokensCount);
+            //System.out.println("Thread " + node.getId() + " queue is " + queue);
             while(!Thread.currentThread().isInterrupted()) {
-                sleep(20);
-                System.out.println("Thread " + node.getId() + " trying to receive, current queue size " + queue.size());
+                //sleep(20);
+                //System.out.println("Thread " + node.getId() + " trying to receive, current queue size " + queue.size());
                 Token token = queue.poll();
                 node.receive(token);
             }
         } catch (InterruptedException e) {
-            System.err.println("Node " + node.getId() + " was interrupted");
+            System.out.println("\nAverage latency info for each token in millis:");
+            queue.outputInfo();
+            //System.err.println("Node " + node.getId() + " was interrupted");
         }
     }
 }

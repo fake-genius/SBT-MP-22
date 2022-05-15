@@ -20,4 +20,8 @@ public class TokenQueue {
     public Token poll() throws InterruptedException {
         return queue.take();
     }
+
+    public void outputInfo() {
+        queue.forEach(Token::outputInfo);
+    }
 }
