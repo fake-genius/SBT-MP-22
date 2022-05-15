@@ -34,7 +34,6 @@ public class NodeThread implements Runnable{
             }
         } catch (InterruptedException e) {
             queue.outputInfo();
-
             //System.err.println("Node " + node.getId() + " was interrupted");
         }
     }

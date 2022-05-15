@@ -32,4 +32,8 @@ public class Token {
         System.err.println("Token with dest " + destinationId + ", average latency "
                 + TokenRingCharacteristics.averageLong(latencies) / 1_000_000f);
     }
+
+    public int getStartingNode() {
+        return startingNode;
+    }
 }

@@ -38,7 +38,8 @@ public class Node {
             //System.out.println("Node " + getId() + " accepting token with dest id " + token.getDestinationId());
             tokenConsumer.accept(token);
             //sleep(20);
-            //System.out.println("Node " + getId() + ", latency " + token.getWayTime());
+        }
+        if (getId() == token.getStartingNode() && tokensCount > 0) {
             token.addLatency(token.getWayTime());
         }
         tokensCount++;
