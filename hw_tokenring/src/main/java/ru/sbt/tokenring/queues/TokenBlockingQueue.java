@@ -1,11 +1,13 @@
-package ru.sbt.tokenring;
+package ru.sbt.tokenring.queues;
+
+import ru.sbt.tokenring.Token;
 
 import java.util.concurrent.BlockingQueue;
 
-public class TokenQueue {
+public class TokenBlockingQueue implements TokenQueue {
     private final BlockingQueue<Token> queue;
 
-    public TokenQueue(BlockingQueue<Token> queue) {
+    public TokenBlockingQueue(BlockingQueue<Token> queue) {
         this.queue = queue;
     }
 
@@ -19,6 +21,10 @@ public class TokenQueue {
 
     public Token poll() throws InterruptedException {
         return queue.take();
+    }
+
+    public Token peek() {
+        return queue.peek();
     }
 
     public void outputInfo() {

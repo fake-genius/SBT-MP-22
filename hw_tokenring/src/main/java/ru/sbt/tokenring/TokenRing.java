@@ -1,10 +1,9 @@
 package ru.sbt.tokenring;
 
-import java.util.ArrayList;
+import ru.sbt.tokenring.queues.TokenQueue;
+
 import java.util.List;
 import java.util.function.Consumer;
-
-import static java.util.stream.Collectors.toList;
 
 public class TokenRing {
     private final int size;

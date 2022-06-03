@@ -1,6 +1,7 @@
 package ru.sbt.tokenring;
 
-import static java.lang.Thread.sleep;
+import ru.sbt.tokenring.queues.TokenQueue;
+
 
 public class NodeThread implements Runnable{
     private final Node node;
@@ -25,16 +26,15 @@ public class NodeThread implements Runnable{
         try {
             node.setInternalId(node.getId());
             generateTokens();
-            //System.out.println("Thread " + node.getId() + " queue is " + queue);
             while(!Thread.currentThread().isInterrupted()) {
-                //sleep(20);
-                //System.out.println("Thread " + node.getId() + " trying to receive, current queue size " + queue.size());
-                Token token = queue.poll();
+                Token token = queue.peek();
+                while (token == null) {
+                    token = queue.peek();
+                }
+                token =  queue.poll();
                 node.receive(token);
             }
         } catch (InterruptedException e) {
-            queue.outputInfo();
-            //System.err.println("Node " + node.getId() + " was interrupted");
         }
     }
 }
